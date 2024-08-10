@@ -4,12 +4,12 @@ import com.starforceps.starforceps.domain.user.domain.User;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
+@Table(name = "organizers")
 public class Organizer {
     @Id
     @GeneratedValue
