@@ -1,7 +1,10 @@
 package com.starforceps.starforceps.global.openfeign.config;
 
+import feign.Request;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import feign.codec.Encoder;
+import feign.form.spring.SpringFormEncoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +23,15 @@ public class OpenAIFeignConfig {
                 requestTemplate.header("Authorization", "Bearer " + openAiKey);
             }
         };
+    }
+
+    @Bean
+    public Encoder feignFormEncoder() {
+        return new SpringFormEncoder();
+    }
+
+    @Bean
+    public Request.Options options() {
+        return new Request.Options(3 * 60 * 1000, 10 * 60 * 1000); // 연결 타임아웃 10초, 읽기 타임아웃 60초
     }
 }

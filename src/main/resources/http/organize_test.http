@@ -1,9 +1,0 @@
-POST localhost:8080/api/organizer
-Content-Type: multipart/form-data
-
---boundary
-Content-Disposition: form-data; name="lectureAudioFile"; filename="audio.m4a"
-Content-Type: audio/mp4
-
-< ./../static/audio.m4a
---boundary
