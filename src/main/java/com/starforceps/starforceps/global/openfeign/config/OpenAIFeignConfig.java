@@ -1,4 +1,4 @@
-package com.starforceps.starforceps.global.openfeign;
+package com.starforceps.starforceps.global.openfeign.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
