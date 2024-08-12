@@ -1,8 +1,6 @@
 package com.starforceps.starforceps.global.openfeign.dto;
 
-public record ThreadRunResDto(
-        String id,
-        String thread_id,
+public record RunResDto(
         String status
 ) {
 }

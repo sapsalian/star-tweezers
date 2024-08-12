@@ -26,11 +26,6 @@ public class OpenAIFeignConfig {
     }
 
     @Bean
-    public Encoder feignFormEncoder() {
-        return new SpringFormEncoder();
-    }
-
-    @Bean
     public Request.Options options() {
         return new Request.Options(3 * 60 * 1000, 10 * 60 * 1000); // 연결 타임아웃 10초, 읽기 타임아웃 60초
     }

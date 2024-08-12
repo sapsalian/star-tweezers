@@ -4,6 +4,7 @@ import java.util.List;
 
 public record ThreadRunReqDto(
         String assistant_id,
+        boolean stream,
         ThreadVo thread
 ) {
     public static ThreadRunReqDto of(String assistantId, String role, String content) {
@@ -16,7 +17,7 @@ public record ThreadRunReqDto(
                 List.of(messageVo)
         );
 
-        return new ThreadRunReqDto(assistantId, threadVo);
+        return new ThreadRunReqDto(assistantId, false, threadVo);
     }
 }
 
