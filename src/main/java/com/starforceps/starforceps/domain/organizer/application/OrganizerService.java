@@ -9,6 +9,8 @@ import com.starforceps.starforceps.global.openfeign.util.OpenAiProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrganizerService {
     private final OrganizerRepository organizerRepository;
@@ -38,6 +40,12 @@ public class OrganizerService {
         organizer = organizerRepository.save(organizer);
 
         return OrganizerResponseDto.from(organizer);
+    }
+
+    public List<OrganizerResponseDto> getOrganizes(Long userId) {
+        List<Organizer> organizers = organizerRepository.findAllByUserId(userId);
+
+        return organizers.stream().map(OrganizerResponseDto::from).toList();
     }
 
 }
