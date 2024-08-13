@@ -24,6 +24,7 @@ public class OrganizerService {
     private final OpenAiProvider openAiProvider;
     private final UserRepository userRepository;
 
+
     @Value("${openai-service.assistants.organize}")
     private String organizeAssistants;
 
