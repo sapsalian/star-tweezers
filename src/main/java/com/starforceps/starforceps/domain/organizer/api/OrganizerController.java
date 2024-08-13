@@ -59,4 +59,38 @@ public class OrganizerController {
 
         return ResponseEntity.ok(responseDto);
     }
+
+    @PatchMapping(value = "/api/organizers/{organizer_id}/title")
+    public ResponseEntity<ResponseDto<SimpleOrganizerResDto>> updateTitle(
+            @RequestParam String title,
+            @TokenId Long userId,
+            @PathVariable Long organizer_id
+    ) {
+        SimpleOrganizerResDto simpleOrganizerResDto = organizerService.updateTitle(userId, organizer_id, title);
+
+        ResponseDto<SimpleOrganizerResDto> responseDto = new ResponseDto<>(
+                2003,
+                "정리 제목 수정 완료",
+                simpleOrganizerResDto
+        );
+
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @PatchMapping(value = "/api/organizers/{organizer_id}/description")
+    public ResponseEntity<ResponseDto<SimpleOrganizerResDto>> updateDescription(
+            @RequestParam String description,
+            @TokenId Long userId,
+            @PathVariable Long organizer_id
+    ) {
+        SimpleOrganizerResDto simpleOrganizerResDto = organizerService.updateDescription(userId, organizer_id, description);
+
+        ResponseDto<SimpleOrganizerResDto> responseDto = new ResponseDto<>(
+                2003,
+                "정리 설명 수정 완료",
+                simpleOrganizerResDto
+        );
+
+        return ResponseEntity.ok(responseDto);
+    }
 }

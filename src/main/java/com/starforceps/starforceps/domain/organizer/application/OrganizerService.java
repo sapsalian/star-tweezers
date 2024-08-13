@@ -63,4 +63,34 @@ public class OrganizerService {
 
         organizerRepository.deleteById(organizerId);
     }
+
+    public SimpleOrganizerResDto updateTitle(Long userId, Long organizerId, String title) {
+        Organizer organizer = organizerRepository.findById(organizerId)
+                .orElseThrow(() -> new NoSuchResourceException("존재하지 않는 정리내역에 대한 수정 요청입니다."));
+
+        Long ownerId = organizer.getUser().getId();
+        if (!ownerId.equals(userId)) {
+            throw new PermissionException("정리내역의 소유자가 아닙니다.");
+        }
+
+        organizer.setTitle(title);
+        organizer = organizerRepository.save(organizer);
+
+        return SimpleOrganizerResDto.from(organizer);
+    }
+
+    public SimpleOrganizerResDto updateDescription(Long userId, Long organizerId, String description) {
+        Organizer organizer = organizerRepository.findById(organizerId)
+                .orElseThrow(() -> new NoSuchResourceException("존재하지 않는 정리내역에 대한 수정 요청입니다."));
+
+        Long ownerId = organizer.getUser().getId();
+        if (!ownerId.equals(userId)) {
+            throw new PermissionException("정리내역의 소유자가 아닙니다.");
+        }
+
+        organizer.setDescription(description);
+        organizer = organizerRepository.save(organizer);
+
+        return SimpleOrganizerResDto.from(organizer);
+    }
 }
