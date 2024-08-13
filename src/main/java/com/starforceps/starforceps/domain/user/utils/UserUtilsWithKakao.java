@@ -27,7 +27,7 @@ public class UserUtilsWithKakao {
     private String KAKAO_LOGOUT_URL;
 
     // 인가 코드로 카카오로부터 토큰 받는 함수
-    public ResponseEntity<KakaoTokenResponseDto> getKakaoTokenResponse(String code) {
+    public KakaoTokenResponseDto getKakaoTokenResponse(String code) {
         RestTemplate restTemplate = new RestTemplate();
         System.out.println(REDIRECT_URI);
         System.out.println(KAKAO_TOKEN_URL);
@@ -49,7 +49,7 @@ public class UserUtilsWithKakao {
                 requestEntity,
                 KakaoTokenResponseDto.class
         );
-        return response;
+        return response.getBody();
     }
 
     //엑세스토큰으로 카카오로부터 사용자 정보 조회

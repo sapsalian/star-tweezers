@@ -26,9 +26,9 @@ public class LoginController {
 
     @GetMapping("/oauth")
     public ResponseEntity<ResponseDto<TokenBundle>> loginCallback(@RequestParam String code) {
-        ResponseEntity<KakaoTokenResponseDto> kakaoTokenResponse = userUtilsWithKakao.getKakaoTokenResponse(code);
-        String accessToken = kakaoTokenResponse.getBody().getAccess_token();
-        String refreshToken = kakaoTokenResponse.getBody().getRefresh_token();
+        KakaoTokenResponseDto kakaoTokenResponse = userUtilsWithKakao.getKakaoTokenResponse(code);
+        String accessToken = kakaoTokenResponse.getAccess_token();
+        String refreshToken = kakaoTokenResponse.getRefresh_token();
 
         //유저 정보 조회
         SimpleUserInfoDto simpleUserInfoDto = userUtilsWithKakao.getUserInfo(accessToken);
