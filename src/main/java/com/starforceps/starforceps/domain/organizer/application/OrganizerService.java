@@ -42,10 +42,15 @@ public class OrganizerService {
         return OrganizerResponseDto.from(organizer);
     }
 
-    public List<OrganizerResponseDto> getOrganizes(Long userId) {
+    public List<OrganizerResponseDto> getOrganizers(Long userId) {
         List<Organizer> organizers = organizerRepository.findAllByUserId(userId);
 
         return organizers.stream().map(OrganizerResponseDto::from).toList();
     }
 
+    public void deleteOrganizer(Long userId, Long organizerId) {
+        // TODO: 정리 소유자가 요청한게 맞는지 확인
+
+        organizerRepository.deleteById(organizerId);
+    }
 }
