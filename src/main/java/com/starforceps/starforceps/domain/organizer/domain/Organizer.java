@@ -22,11 +22,9 @@ public class Organizer {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    private String mainPoint;
+    private String originalText;
 
-    private String summary;
-
-    private String examPoint;
+    private String organizedText;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
