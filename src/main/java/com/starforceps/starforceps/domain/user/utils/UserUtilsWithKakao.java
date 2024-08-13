@@ -76,7 +76,7 @@ public class UserUtilsWithKakao {
     }
 
     public LogoutResponseDto getLogoutResponseDto(HttpServletRequest request) {
-        String accessToken = request.getHeader("Authorization").substring(7);
+        String accessToken = UserUtils.getAccessToken(request);;
         RestTemplate restTemplate = new RestTemplate();
 
         // 헤더 설정
