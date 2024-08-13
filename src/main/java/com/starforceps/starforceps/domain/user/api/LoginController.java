@@ -1,6 +1,5 @@
 package com.starforceps.starforceps.domain.user.api;
 
-import com.starforceps.starforceps.ResponseDto;
 import com.starforceps.starforceps.domain.user.application.UserService;
 import com.starforceps.starforceps.domain.user.domain.User;
 import com.starforceps.starforceps.domain.user.dto.KakaoTokenResponseDto;
@@ -8,6 +7,7 @@ import com.starforceps.starforceps.domain.user.dto.LogoutResponseDto;
 import com.starforceps.starforceps.domain.user.dto.SimpleUserInfoDto;
 import com.starforceps.starforceps.domain.user.dto.UserInfo;
 import com.starforceps.starforceps.domain.user.utils.UserUtilsWithKakao;
+import com.starforceps.starforceps.global.common.dto.ResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;

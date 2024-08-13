@@ -4,6 +4,7 @@ import com.starforceps.starforceps.domain.organizer.dao.OrganizerRepository;
 import com.starforceps.starforceps.domain.organizer.domain.Organizer;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerRequestDto;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerResponseDto;
+import com.starforceps.starforceps.domain.organizer.dto.SimpleOrganizerResDto;
 import com.starforceps.starforceps.domain.user.application.UserService;
 import com.starforceps.starforceps.domain.user.dao.UserRepository;
 import com.starforceps.starforceps.domain.user.domain.User;
@@ -45,10 +46,10 @@ public class OrganizerService {
         return OrganizerResponseDto.from(organizer);
     }
 
-    public List<OrganizerResponseDto> getOrganizers(Long userId) {
+    public List<SimpleOrganizerResDto> getOrganizers(Long userId) {
         List<Organizer> organizers = organizerRepository.findAllByUserId(userId);
 
-        return organizers.stream().map(OrganizerResponseDto::from).toList();
+        return organizers.stream().map(SimpleOrganizerResDto::from).toList();
     }
 
     public void deleteOrganizer(Long userId, Long organizerId) {
@@ -61,5 +62,35 @@ public class OrganizerService {
         }
 
         organizerRepository.deleteById(organizerId);
+    }
+
+    public SimpleOrganizerResDto updateTitle(Long userId, Long organizerId, String title) {
+        Organizer organizer = organizerRepository.findById(organizerId)
+                .orElseThrow(() -> new NoSuchResourceException("존재하지 않는 정리내역에 대한 수정 요청입니다."));
+
+        Long ownerId = organizer.getUser().getId();
+        if (!ownerId.equals(userId)) {
+            throw new PermissionException("정리내역의 소유자가 아닙니다.");
+        }
+
+        organizer.setTitle(title);
+        organizer = organizerRepository.save(organizer);
+
+        return SimpleOrganizerResDto.from(organizer);
+    }
+
+    public SimpleOrganizerResDto updateDescription(Long userId, Long organizerId, String description) {
+        Organizer organizer = organizerRepository.findById(organizerId)
+                .orElseThrow(() -> new NoSuchResourceException("존재하지 않는 정리내역에 대한 수정 요청입니다."));
+
+        Long ownerId = organizer.getUser().getId();
+        if (!ownerId.equals(userId)) {
+            throw new PermissionException("정리내역의 소유자가 아닙니다.");
+        }
+
+        organizer.setDescription(description);
+        organizer = organizerRepository.save(organizer);
+
+        return SimpleOrganizerResDto.from(organizer);
     }
 }

@@ -9,7 +9,6 @@ public record OrganizerResponseDto(
     String title,
     String description,
     LocalDate createdAt,
-    String originalText,
     String organizedText
 ) {
     public static OrganizerResponseDto from(Organizer organizer) {
@@ -18,7 +17,6 @@ public record OrganizerResponseDto(
                 organizer.getTitle(),
                 organizer.getDescription(),
                 organizer.getCreatedAt().toLocalDate(),
-                organizer.getOriginalText(),
                 organizer.getOrganizedText()
         );
     }

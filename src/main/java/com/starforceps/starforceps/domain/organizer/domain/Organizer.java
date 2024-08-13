@@ -39,4 +39,12 @@ public class Organizer {
         this.organizedText = organizedText;
         this.user = user;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
