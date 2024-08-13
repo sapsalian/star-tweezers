@@ -2,6 +2,7 @@ package com.starforceps.starforceps.domain.organizer.api;
 
 import com.starforceps.starforceps.domain.organizer.application.OrganizerService;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerRequestDto;
+import com.starforceps.starforceps.domain.organizer.dto.OrganizerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +20,8 @@ public class OrganizerController {
     }
 
     @PostMapping(value = "/api/organizer", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String organize(@ModelAttribute OrganizerRequestDto organizerRequestDto) {
-        return organizerService.organize(organizerRequestDto);
+    public OrganizerResponseDto organize(@ModelAttribute OrganizerRequestDto organizerRequestDto) {
+        Long userId = (long)1;
+        return organizerService.organize(userId ,organizerRequestDto);
     }
 }

@@ -1,7 +1,10 @@
 package com.starforceps.starforceps.domain.organizer.application;
 
 import com.starforceps.starforceps.domain.organizer.dao.OrganizerRepository;
+import com.starforceps.starforceps.domain.organizer.domain.Organizer;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerRequestDto;
+import com.starforceps.starforceps.domain.organizer.dto.OrganizerResponseDto;
+import com.starforceps.starforceps.domain.user.domain.User;
 import com.starforceps.starforceps.global.openfeign.util.OpenAiProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,12 +22,20 @@ public class OrganizerService {
         this.openAiProvider = openAiProvider;
     }
 
-    public String organize(OrganizerRequestDto organizerRequestDto) {
+    public OrganizerResponseDto organize(Long userId, OrganizerRequestDto organizerRequestDto) {
         String lectureContent = openAiProvider.audioToText(organizerRequestDto.lectureAudioFile());
 
         String lectureSummary = openAiProvider.askToGpt(organizeAssistants, lectureContent);
 
-        return lectureSummary;
+        User user = new User();
+
+        Organizer organizer = new Organizer(
+                lectureContent,
+                lectureSummary,
+                user
+        );
+
+        return OrganizerResponseDto.from(organizer);
     }
 
 }
