@@ -3,6 +3,7 @@ package com.starforceps.starforceps.domain.organizer.api;
 import com.starforceps.starforceps.domain.organizer.application.OrganizerService;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerRequestDto;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerResponseDto;
+import com.starforceps.starforceps.domain.organizer.dto.SimpleOrganizerResDto;
 import com.starforceps.starforceps.global.common.custom_annotation.annotation.TokenId;
 import com.starforceps.starforceps.global.common.dto.ResponseDto;
 import jakarta.validation.constraints.Null;
@@ -34,10 +35,10 @@ public class OrganizerController {
     }
 
     @GetMapping(value = "/api/organizers")
-    public ResponseEntity<ResponseDto<List<OrganizerResponseDto>>> getOrganizers(@TokenId Long userId) {
-        List<OrganizerResponseDto> organizers = organizerService.getOrganizers(userId);
+    public ResponseEntity<ResponseDto<List<SimpleOrganizerResDto>>> getOrganizers(@TokenId Long userId) {
+        List<SimpleOrganizerResDto> organizers = organizerService.getOrganizers(userId);
 
-        ResponseDto<List<OrganizerResponseDto>> responseDto = new ResponseDto<>(
+        ResponseDto<List<SimpleOrganizerResDto>> responseDto = new ResponseDto<>(
                 2001,
                 "정리 조회 완료",
                 organizers

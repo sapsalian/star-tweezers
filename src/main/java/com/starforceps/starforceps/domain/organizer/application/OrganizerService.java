@@ -4,6 +4,7 @@ import com.starforceps.starforceps.domain.organizer.dao.OrganizerRepository;
 import com.starforceps.starforceps.domain.organizer.domain.Organizer;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerRequestDto;
 import com.starforceps.starforceps.domain.organizer.dto.OrganizerResponseDto;
+import com.starforceps.starforceps.domain.organizer.dto.SimpleOrganizerResDto;
 import com.starforceps.starforceps.domain.user.application.UserService;
 import com.starforceps.starforceps.domain.user.dao.UserRepository;
 import com.starforceps.starforceps.domain.user.domain.User;
@@ -45,10 +46,10 @@ public class OrganizerService {
         return OrganizerResponseDto.from(organizer);
     }
 
-    public List<OrganizerResponseDto> getOrganizers(Long userId) {
+    public List<SimpleOrganizerResDto> getOrganizers(Long userId) {
         List<Organizer> organizers = organizerRepository.findAllByUserId(userId);
 
-        return organizers.stream().map(OrganizerResponseDto::from).toList();
+        return organizers.stream().map(SimpleOrganizerResDto::from).toList();
     }
 
     public void deleteOrganizer(Long userId, Long organizerId) {
