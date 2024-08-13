@@ -1,6 +1,7 @@
 package com.starforceps.starforceps.global.common.exception.handler;
 
 import com.starforceps.starforceps.global.common.dto.ResponseDto;
+import com.starforceps.starforceps.global.common.exception.custom_exception.NoSuchResourceException;
 import jakarta.validation.constraints.Null;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(NoSuchResourceException.class)
+    public ResponseEntity<ResponseDto<Null>> handleNoSuchResourceException(Exception e) {
+        ResponseDto<Null> responseDto = new ResponseDto<>(
+                4040,
+                e.getMessage(),
+                null
+        );
+
+        return new ResponseEntity<>(responseDto, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseDto<Null>> handleException(Exception e) {
         ResponseDto<Null> responseDto = new ResponseDto<>(
