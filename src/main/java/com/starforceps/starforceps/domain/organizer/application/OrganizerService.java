@@ -35,6 +35,8 @@ public class OrganizerService {
                 user
         );
 
+        organizer = organizerRepository.save(organizer);
+
         return OrganizerResponseDto.from(organizer);
     }
 
