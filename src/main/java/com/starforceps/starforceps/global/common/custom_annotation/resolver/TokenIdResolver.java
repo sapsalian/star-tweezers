@@ -1,7 +1,7 @@
 package com.starforceps.starforceps.global.common.custom_annotation.resolver;
 
 import com.starforceps.starforceps.domain.user.domain.User;
-import com.starforceps.starforceps.domain.user.dto.SimpleUserInfoDto;
+import com.starforceps.starforceps.domain.user.dto.SimpleUserInfoFromKakao;
 import com.starforceps.starforceps.domain.user.utils.UserUtilsWithKakao;
 import com.starforceps.starforceps.global.common.custom_annotation.annotation.TokenId;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class TokenIdResolver implements HandlerMethodArgumentResolver {
     public Long resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         String token = webRequest.getHeader("Authorization").substring(7);
 
-        SimpleUserInfoDto simpleUserInfoDto = userUtilsWithKakao.getUserInfo(token);
+        SimpleUserInfoFromKakao simpleUserInfoDto = userUtilsWithKakao.getUserInfo(token);
 
         return simpleUserInfoDto.getId();
     }

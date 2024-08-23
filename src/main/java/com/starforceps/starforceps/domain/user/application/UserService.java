@@ -15,7 +15,13 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public Optional<User> findUser(Long social_id){
+    public User findOneById(Long id) {
+        return userRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("사용자가 존재하지 않음")
+        );
+    }
+
+    public Optional<User> findOneBySocialId(Long social_id){
         return userRepository.findBySocialId(social_id);
     };
 
@@ -23,5 +29,11 @@ public class UserService {
         User user = User.from(userInfo);
         userRepository.save(user);
         return user;
+    }
+
+    public User findBySocialId(Long social_id) {
+        return userRepository.findBySocialId(social_id).orElseThrow(
+                ()-> new RuntimeException("사용자가 존재 하지 않음")
+        );
     }
 }

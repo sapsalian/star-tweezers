@@ -2,7 +2,7 @@ package com.starforceps.starforceps.domain.user.utils;
 
 import com.starforceps.starforceps.domain.user.dto.KakaoTokenResponseDto;
 import com.starforceps.starforceps.domain.user.dto.LogoutResponseDto;
-import com.starforceps.starforceps.domain.user.dto.SimpleUserInfoDto;
+import com.starforceps.starforceps.domain.user.dto.SimpleUserInfoFromKakao;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,7 +53,7 @@ public class UserUtilsWithKakao {
     }
 
     //엑세스토큰으로 카카오로부터 사용자 정보 조회
-    public SimpleUserInfoDto getUserInfo(String accessToken) {
+    public SimpleUserInfoFromKakao getUserInfo(String accessToken) {
         RestTemplate restTemplate = new RestTemplate();
 
         // 요청 헤더 설정
@@ -64,12 +64,13 @@ public class UserUtilsWithKakao {
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
         // GET 요청 실행
-        ResponseEntity<SimpleUserInfoDto> response = restTemplate.exchange(
+        ResponseEntity<SimpleUserInfoFromKakao> response = restTemplate.exchange(
                 KAKAO_USER_INFO_URL,
                 HttpMethod.GET,
                 requestEntity,
-                SimpleUserInfoDto.class
+                SimpleUserInfoFromKakao.class
         );
+        log.info(response.getBody().toString());
 
         // 응답 본문 반환
         return response.getBody();
